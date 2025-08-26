@@ -3,16 +3,17 @@ package tp7;
 public class Empleado {
 
 	private String nombre;
-	private Integer sueldo;	
+	private Integer sueldo;
+	private Integer legajo;	
 	
 	public Empleado() {
 		super();
 	}
 
-	public Empleado(String nombre, Integer sueldo) {
+	public Empleado(String nombre, Integer sueldo) throws StringException, EnteroPositivoException {
 		super();
-		this.nombre = nombre;
-		this.sueldo = sueldo;
+		this.setNombre(nombre);
+		this.setSueldo(sueldo);
 	}
 
 	public Empleado(String nombre) {
@@ -29,7 +30,10 @@ public class Empleado {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws StringException {
+		if (nombre == null || nombre.length() < 3) {
+			throw new StringException("El nombre del empleado debe tener 3 o mas caracteres.");
+		}
 		this.nombre = nombre;
 	}
 
@@ -37,8 +41,22 @@ public class Empleado {
 		return sueldo;
 	}
 
-	public void setSueldo(Integer sueldo) {
+	public void setSueldo(Integer sueldo) throws EnteroPositivoException {
+		if (sueldo == null || sueldo <= 0) {
+			throw new EnteroPositivoException("El sueldo del empleado debe ser mayor a 0.");
+		}
 		this.sueldo = sueldo;
+	}
+	
+	public Integer getLegajo() {
+		return legajo;
+	}
+	
+	public void setLegajo(Integer legajo) throws EnteroPositivoException {
+		if (legajo == null || legajo <= 0) {
+			throw new EnteroPositivoException("El legajo del empleado debe ser mayor a 0.");
+		}
+		this.legajo = legajo;
 	}
 	
 	public String getSueldoString() {
